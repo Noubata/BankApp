@@ -9,6 +9,7 @@ public class Account {
     private String name;
     private int balance;
     private String password;
+    private String accountNumber;
 
     public Account(String firstName, String password) {
         this.name = firstName;
@@ -18,6 +19,12 @@ public class Account {
     public int getBalance(String password) {
         validate(password);
         return balance;
+    }
+    public String getAccountNumber(){
+        return accountNumber;
+    }
+    public void setAccountNumber(String accountNumber){
+        this.accountNumber = accountNumber;
     }
 
     private void validate(String password) {
