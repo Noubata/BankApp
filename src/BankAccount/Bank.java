@@ -1,5 +1,7 @@
 package BankAccount;
 
+import BankException.NoAccountException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,6 @@ public class Bank {
         accounts.add(account);
         return account;
     }
-
     public Account getMeAccountNumberFromAccount(String accountNumber){
         return accounts.get(Integer.parseInt(accountNumber)-1);
     }
@@ -34,5 +35,9 @@ public class Bank {
         getMeAccountNumberFromAccount(accountNumberSender).withdraw(amount, password);
         getMeAccountNumberFromAccount(accountNumberReceiver).deposit(amount);
 
+    }
+    public int showBalance(String accountNumber, String password){
+        int theBalance = getMeAccountNumberFromAccount(accountNumber).getBalance(password);
+        return theBalance;
     }
 }
