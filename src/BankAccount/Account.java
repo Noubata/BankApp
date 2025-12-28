@@ -38,6 +38,11 @@ public class Account {
         balance += amount;
         return balance;
     }
+    private void validateAccountNumber(int accountNumber){
+        if (!this.accountNumber.equals(accountNumber)){
+            throw new IncorrectPassword("Invalid accountNumber!!");
+        }
+    }
 
     private void validate(int amount) {
         if (amount < 0) {
