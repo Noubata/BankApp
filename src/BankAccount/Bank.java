@@ -7,10 +7,15 @@ import java.util.List;
 
 public class Bank {
 
-    private List<Account> accounts = new ArrayList<>();
-    private int accountNumber = 1;
+    private List<Account> accounts;
+    private int accountNumber;
     private String firstName;
 
+    public Bank(String name){
+        this.accounts = new ArrayList<>();
+        this.accountNumber = 1;
+        this.firstName = name;
+    }
     public int getSize() {
         return accounts.size();
     }

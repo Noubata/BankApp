@@ -8,19 +8,19 @@ public class BankTest {
 
     @Test
     void testThat_myBankHasNoaccount(){
-        Bank orabank = new Bank();
+        Bank orabank = new Bank("Orabank");
         assertEquals(0, orabank.getSize());
     }
     @Test
     void testThat_createAnAccount_myBankHasOneAccount(){
-        Bank orabank = new Bank();
+        Bank orabank = new Bank("Orabank");
         assertEquals(0, orabank.getSize());
         orabank.createAccount("Beny", "1234");
         assertEquals(1, orabank.getSize());
     }
     @Test
     void testThat_createAccount_theNumberIsKnown(){
-        Bank orabank = new Bank();
+        Bank orabank = new Bank("Orabank");
         assertEquals(0, orabank.getSize());
         Account account = orabank.createAccount("Beny", "1234");
         assertEquals(1, orabank.getSize());
@@ -28,21 +28,21 @@ public class BankTest {
     }
     @Test
     void testThat_deposit500_balance500(){
-        Bank orabank = new Bank();
+        Bank orabank = new Bank("Orabank");
         orabank.createAccount("Beny", "1234");
         assertEquals(1, orabank.getSize());
         assertEquals(500, orabank.deposit("1", 500));
     }
     @Test
     void testThat_deposit500_withdraw200_balance300(){
-        Bank orabank = new Bank();
+        Bank orabank = new Bank("Orabank");
         orabank.createAccount("Beny", "1234");
         assertEquals(500, orabank.deposit("1", 500));
         assertEquals(300, orabank.withdraw("1", 200, "1234"));
     }
     @Test
     void testThat_createAccountBeny_deposit200_transfer100ToChibuzo(){
-        Bank orabank = new Bank();
+        Bank orabank = new Bank("Orabank");
         assertEquals(0, orabank.getSize());
         Account account = orabank.createAccount("Beny", "1234");
         Account account1 = orabank.createAccount("Chibuzo", "2234");

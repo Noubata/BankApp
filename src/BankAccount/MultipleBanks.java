@@ -8,11 +8,9 @@ public class MultipleBanks {
     }
 
     public void bankCreation(){
-        Bank gourrouss = new Bank();
-        Bank ecobank = new Bank();
-        Bank uba = new Bank();
-        banks[0] = gourrouss;
-        banks[1] = ecobank;
-        banks[2] = uba;
+        Bank gourrouss = new Bank("gourrouss");
+        Bank ecobank = new Bank("Orabank");
+        Bank uba = new Bank("Orabank");
+
     }
 }
