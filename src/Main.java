@@ -10,14 +10,15 @@ import BankException.BankAppExecption;
 public class Main{
     public static void main(String...args){
         Scanner userInput = new Scanner(System.in);
-        Bank bank = new Bank();
+        Bank orabank = new Bank("Orabank");
+        Bank semiBank = new Bank("semicolon");
 
         int choice = 0;
         do {
             System.out.println("""
                     
                     Welcome to Orabank!!
-                    
+                   
                     1. Creeate account
                     2. Check Balance
                     3. Deposit
@@ -31,57 +32,154 @@ public class Main{
             try {
                 System.out.println("Choose from above: ");
                 choice = userInput.nextInt();
-                if (choice <= -1 || choice > 3) {
+                if (choice <= -1 || choice > 6) {
                     throw new IllegalArgumentException("Please! Choose only from above!");
                 }
                 switch (choice) {
 
                     case 1 -> {
-                        System.out.print("Enter your first name: ");
-                        String name = userInput.nextLine();
-                        System.out.print("Enter your password: ");
-                        String password = userInput.nextLine();
-                        Account account = bank.createAccount(name, password);
-                        System.out.println("Account created successfully!");
-                        System.out.println("Your acoount NUMBER is: " + account.getAccountNumber());
+                        System.out.println("""
+                                
+                                Which bank do you prefer:
+                        1. Orabank
+                        2. SemiBank
+                               --------------------------
+                        """);
+                        System.out.print("Choose from above: ");
+                        int chosenBank = userInput.nextInt();
+                        if (chosenBank == 1){
+                            System.out.print("Enter your first name: ");
+                            String name = userInput.next();
+                            System.out.print("Enter your password: ");
+                            String password = userInput.next();
+                            Account account = orabank.createAccount(name, password);
+                            System.out.println("Account created successfully!");
+                            System.out.println("Your acoount NUMBER is: " + account.getAccountNumber());
+                        }else {
+                            System.out.print("Enter your first name: ");
+                            String name = userInput.next();
+                            System.out.print("Enter your password: ");
+                            String password = userInput.next();
+                            Account account = semiBank.createAccount(name, password);
+                            System.out.println("Account created successfully!");
+                            System.out.println("Your acoount NUMBER is: " + account.getAccountNumber());
+                        }
                     }
                     case 2 -> {
-                        System.out.println("Enter your account number: ");
-                        String accountNumber = userInput.nextLine();
-                        System.out.println("Enter your password: ");
-                        String password = userInput.nextLine();
-                        int theBalance = bank.showBalance(accountNumber, password);
-                        System.out.println("Your balance is: " + theBalance);
+                        System.out.println("""
+                                
+                                Which bank do you want to check the balance:
+                        1. Orabank
+                        2. SemiBank
+                               --------------------------
+                        """);
+                        System.out.print("Choose from above: ");
+                        int checkBalance = userInput.nextInt();
+                        if (checkBalance == 1) {
+                            System.out.println("Enter your account number: ");
+                            String accountNumber = userInput.next();
+                            System.out.println("Enter your password: ");
+                            String password = userInput.next();
+                            int theBalance = orabank.showBalance(accountNumber, password);
+                            System.out.println("Your balance is: " + theBalance);
+                        }else {
+                            System.out.println("Enter your account number: ");
+                            String accountNumber = userInput.next();
+                            System.out.println("Enter your password: ");
+                            String password = userInput.next();
+                            int theBalance = semiBank.showBalance(accountNumber, password);
+                            System.out.println("Your balance is: " + theBalance);
+                        }
                     }
                     case 3 -> {
-                        System.out.println("Enter your account Number: ");
-                        String accountNumber = userInput.nextLine();
-                        System.out.println("Enter the amount: ");
-                        int amount = userInput.nextInt();
-                        bank.deposit(accountNumber, amount);
-                        System.out.println("amount added successfully!");
+                        System.out.println("""
+                                
+                                Which bank do you want to deposit to:
+                        1. Orabank
+                        2. SemiBank
+                               --------------------------
+                        """);
+                        System.out.print("Choose from above: ");
+                        int depositMoney = userInput.nextInt();
+                        if (depositMoney == 1) {
+                            System.out.println("Enter your account Number: ");
+                            String accountNumber = userInput.next();
+                            System.out.println("Enter the amount: ");
+                            int amount = userInput.nextInt();
+                            orabank.deposit(accountNumber, amount);
+                            System.out.println("amount added successfully!");
+                        }else {
+                            System.out.println("Enter your account Number: ");
+                            String accountNumber = userInput.next();
+                            System.out.println("Enter the amount: ");
+                            int amount = userInput.nextInt();
+                            semiBank.deposit(accountNumber, amount);
+                            System.out.println("amount added successfully!");
+                        }
                     }
                     case 4 -> {
-                        System.out.println("Enter your account Number: ");
-                        String accountNumber = userInput.nextLine();
-                        System.out.println("Enter the amount: ");
-                        int amount = userInput.nextInt();
-                        System.out.println("Enter your password: ");
-                        String password = userInput.nextLine();
-                        bank.withdraw(accountNumber, amount, password);
-                        System.out.println("withdrawn successfully!");
+                        System.out.println("""
+                                
+                                Which bank do you want to withdraw from:
+                        1. Orabank
+                        2. SemiBank
+                               --------------------------
+                        """);
+                        System.out.print("Choose from above: ");
+                        int withdrawMoney = userInput.nextInt();
+                        if (withdrawMoney == 1) {
+                            System.out.println("Enter your account Number: ");
+                            String accountNumber = userInput.next();
+                            System.out.println("Enter the amount: ");
+                            int amount = userInput.nextInt();
+                            System.out.println("Enter your password: ");
+                            String password = userInput.next();
+                            orabank.withdraw(accountNumber, amount, password);
+                            System.out.println("withdrawn successfully!");
+                        }else {
+                            System.out.println("Enter your account Number: ");
+                            String accountNumber = userInput.next();
+                            System.out.println("Enter the amount: ");
+                            int amount = userInput.nextInt();
+                            System.out.println("Enter your password: ");
+                            String password = userInput.next();
+                            semiBank.withdraw(accountNumber, amount, password);
+                            System.out.println("withdrawn successfully!");
+                        }
                     }
                     case 5 -> {
-                        System.out.println("Enter your account Number: ");
-                        String accountNumberOfTheSender = userInput.nextLine();
-                        System.out.println("Enter the account Number of the receiver: ");
-                        String accountNumberOfTheReceiver = userInput.nextLine();
-                        System.out.println("Enter the amount: ");
-                        int amount = userInput.nextInt();
-                        System.out.println("Enter your password: ");
-                        String password = userInput.nextLine();
-                        bank.transfer(accountNumberOfTheSender, accountNumberOfTheReceiver, amount, password);
-                        System.out.println("Transfert successfully executed!");
+                        System.out.println("""
+                                
+                                Which bank do you want to withdraw from:
+                        1. Orabank
+                        2. SemiBank
+                               --------------------------
+                        """);
+                        System.out.print("Choose from above: ");
+                        int transferMoney = userInput.nextInt();
+                        if (transferMoney == 1) {
+                            System.out.println("Enter your account Number: ");
+                            String accountNumberOfTheSender = userInput.next();
+                            System.out.println("Enter the account Number of the receiver: ");
+                            String accountNumberOfTheReceiver = userInput.next();
+                            System.out.println("Enter the amount: ");
+                            int amount = userInput.nextInt();
+                            System.out.println("Enter your password: ");
+                            String password = userInput.next();
+                            orabank.transfer(accountNumberOfTheSender, accountNumberOfTheReceiver, amount, password);
+                            System.out.println("Transfert successfully executed!");
+                        }else{
+                            System.out.println("Enter your account Number: ");
+                            String accountNumberOfTheSender = userInput.next();
+                            System.out.println("Enter the account Number of the receiver: ");
+                            String accountNumberOfTheReceiver = userInput.next();
+                            System.out.println("Enter the amount: ");
+                            int amount = userInput.nextInt();
+                            System.out.println("Enter your password: ");
+                            String password = userInput.next();
+                            semiBank.transfer(accountNumberOfTheSender, accountNumberOfTheReceiver, amount, password);
+                            System.out.println("Transfert successfully executed!");
+                        }
                     }
                 }
 
