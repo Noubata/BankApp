@@ -8,11 +8,14 @@ public class AccountNumberGenerator {
         this.bankCode = bankCode;
         this.serial = serial;
     }
-    public synchronized String generateNUBAN() {
+    public String generateAccountNumber() {
         serial++;
         String eachSerial = String.format("%09d", serial);
+        return generateNUBAN(bankCode, eachSerial);
+    }
+    public String generateNUBAN(String bankCode, String eachSerial) {
         int checkDigit = calculateCheckDigit(bankCode, eachSerial);
-        return eachSerial + checkDigit;
+        return bankCode.substring(0, 3) + eachSerial + checkDigit;
     }
     private int calculateCheckDigit(String bankCode, String serial) {
         String accountBase = bankCode.substring(0, 3) + serial;

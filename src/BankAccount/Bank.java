@@ -21,7 +21,7 @@ public class Bank {
     }
 
     public Account createAccount(String firstName, String password) {
-        String nuban = generator.generateNUBAN();
+        String nuban = generator.generateAccountNumber();
         Account account = new Account(nuban,firstName, password);
         accounts.add(account);
         return account;
