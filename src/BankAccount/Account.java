@@ -7,24 +7,30 @@ import BankException.InsufficientFounds;
 public class Account {
 
     private String name;
-    private int balance;
+    private double balance;
     private String password;
-    private String accountNumber;
+    private String nuban;
+    private String serialNumber;
 
-    public Account(String firstName, String password) {
+    public Account(String nuban, String firstName, String password) {
+        this.nuban = nuban;
         this.name = firstName;
         this.password = password;
+        this.balance = 0.0;
     }
 
-    public int getBalance(String password) {
+    public String serialNumberGenerator(String serialNumber){
+        int number = Integer.parseInt(serialNumber);
+        int newNumber = number + 1;
+        return String.format("%09d", newNumber);
+    }
+
+    public double getBalance(String password) {
         validate(password);
         return balance;
     }
-    public String getAccountNumber(){
-        return accountNumber;
-    }
-    public void setAccountNumber(String accountNumber){
-        this.accountNumber = accountNumber;
+    public String getNuban(){
+        return nuban;
     }
 
     private void validate(String password) {
@@ -33,30 +39,30 @@ public class Account {
         }
     }
 
-    public int deposit(int amount) {
+    public double deposit(double amount) {
         validate(amount);
         balance += amount;
         return balance;
     }
     private void validateAccountNumber(int accountNumber){
-        if (!this.accountNumber.equals(accountNumber)){
+        if (!this.nuban.equals(accountNumber)){
             throw new IncorrectPassword("Invalid accountNumber!!");
         }
     }
 
-    private void validate(int amount) {
+    private void validate(double amount) {
         if (amount < 0) {
             throw new InsufficientAmount("Insufficient funds!!");
         }
     }
 
-    public int withdraw(int amount, String password) {
+    public double withdraw(double amount, String password) {
         withdrawValidation(amount);
         balance-=amount;
         return balance;
     }
 
-    private void withdrawValidation(int amount) {
+    private void withdrawValidation(double amount) {
         if (amount < 0){
             throw new InsufficientFounds("Insufficient funds!!");
         }

@@ -8,12 +8,12 @@ import java.util.List;
 public class Bank {
 
     private List<Account> accounts;
-    private int accountNumber;
     private String firstName;
+    private final AccountNumberGenerator generator;
 
-    public Bank(String name){
+    public Bank(String name, AccountNumberGenerator generator){
         this.accounts = new ArrayList<>();
-        this.accountNumber = 1;
+        this.generator = generator;
         this.firstName = name;
     }
     public int getSize() {
@@ -21,18 +21,18 @@ public class Bank {
     }
 
     public Account createAccount(String firstName, String password) {
-        Account account = new Account(firstName, password);
-        account.setAccountNumber("" + accountNumber++);
+        String nuban = generator.generateNUBAN();
+        Account account = new Account(nuban,firstName, password);
         accounts.add(account);
         return account;
     }
     public Account getMeAccountNumberFromAccount(String accountNumber){
         return accounts.get(Integer.parseInt(accountNumber)-1);
     }
-    public int deposit(String accountNumber, int amount) {
+    public double deposit(String accountNumber, int amount) {
         return getMeAccountNumberFromAccount(accountNumber).deposit(amount);
     }
-    public int withdraw(String accountNumber, int amount, String password) {
+    public double withdraw(String accountNumber, int amount, String password) {
         return getMeAccountNumberFromAccount(accountNumber).withdraw(amount, password);
     }
 
@@ -41,8 +41,8 @@ public class Bank {
         getMeAccountNumberFromAccount(accountNumberReceiver).deposit(amount);
 
     }
-    public int showBalance(String accountNumber, String password){
-        int theBalance = getMeAccountNumberFromAccount(accountNumber).getBalance(password);
+    public double showBalance(String accountNumber, String password){
+        double theBalance = getMeAccountNumberFromAccount(accountNumber).getBalance(password);
         return theBalance;
     }
 }

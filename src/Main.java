@@ -1,6 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import BankAccount.Account;
+import BankAccount.AccountNumberGenerator;
 import BankAccount.Bank;
 import BankException.IncorrectPassword;
 import BankException.InsufficientFounds;
@@ -10,8 +11,8 @@ import BankException.BankAppExecption;
 public class Main{
     public static void main(String...args){
         Scanner userInput = new Scanner(System.in);
-        Bank orabank = new Bank("Orabank");
-        Bank semiBank = new Bank("semicolon");
+        Bank orabank = new Bank("Orabank", new AccountNumberGenerator("123", 334322234));
+        Bank semiBank = new Bank("semicolon", new AccountNumberGenerator("234", 908765432));
 
         int choice = 0;
         do {
@@ -53,16 +54,18 @@ public class Main{
                             System.out.print("Enter your password: ");
                             String password = userInput.next();
                             Account account = orabank.createAccount(name, password);
+                            String accountNumber = account.getNuban();
                             System.out.println("Account created successfully!");
-                            System.out.println("Your acoount NUMBER is: " + account.getAccountNumber());
+                            System.out.println("Your acoount NUMBER is: " + accountNumber);
                         }else {
                             System.out.print("Enter your first name: ");
                             String name = userInput.next();
                             System.out.print("Enter your password: ");
                             String password = userInput.next();
                             Account account = semiBank.createAccount(name, password);
+                            String number = account.getNuban();
                             System.out.println("Account created successfully!");
-                            System.out.println("Your acoount NUMBER is: " + account.getAccountNumber());
+                            System.out.println("Your acoount NUMBER is: " + number);
                         }
                     }
                     case 2 -> {
@@ -80,14 +83,14 @@ public class Main{
                             String accountNumber = userInput.next();
                             System.out.println("Enter your password: ");
                             String password = userInput.next();
-                            int theBalance = orabank.showBalance(accountNumber, password);
+                            double theBalance = orabank.showBalance(accountNumber, password);
                             System.out.println("Your balance is: " + theBalance);
                         }else {
                             System.out.println("Enter your account number: ");
                             String accountNumber = userInput.next();
                             System.out.println("Enter your password: ");
                             String password = userInput.next();
-                            int theBalance = semiBank.showBalance(accountNumber, password);
+                            double theBalance = semiBank.showBalance(accountNumber, password);
                             System.out.println("Your balance is: " + theBalance);
                         }
                     }
