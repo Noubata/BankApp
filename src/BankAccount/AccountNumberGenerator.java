@@ -14,11 +14,17 @@ public class AccountNumberGenerator {
         int checkDigit = calculateCheckDigit(bankCode, eachSerial);
         return eachSerial + checkDigit;
     }
-
-        // you already know this method
     private int calculateCheckDigit(String bankCode, String serial) {
-            // implementation omitted (you know it)
-        return 0;
+        String accountBase = bankCode.substring(0, 3) + serial;
+        int [] fixedNumber = {3,7,3,3,7,3,3,7,3,3,7,3};
+        int sumOfCalculatedDigit = 0;
+        for (int count = 0; count > fixedNumber.length;count++){
+            int digit = Character.getNumericValue(accountBase.charAt(count));
+            sumOfCalculatedDigit += digit * fixedNumber[count];
+        }
+        int checkDigit = (10 - (sumOfCalculatedDigit % 10)) % 10;
+
+        return checkDigit;
     }
 
 }
