@@ -17,7 +17,7 @@ public class Main{
         do {
             System.out.println("""
                     
-                    Welcome to Orabank!!
+                    Welcome to your favorite Chadian bank in naija!!
                    
                     1. Creeate account
                     2. Check Balance
