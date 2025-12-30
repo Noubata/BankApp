@@ -20,7 +20,7 @@ public class Main{
                     
                     Welcome to your favorite Chadian bank in naija!!
                    
-                    1. Creeate account
+                    1. Create account
                     2. Check Balance
                     3. Deposit
                     4. Withdraw

@@ -10,21 +10,13 @@ public class Account {
     private double balance;
     private String password;
     private String nuban;
-    private String serialNumber;
 
-    public Account(String nuban, String firstName, String password) {
+    public Account(String nuban, String name, String password) {
         this.nuban = nuban;
-        this.name = firstName;
+        this.name = name;
         this.password = password;
         this.balance = 0.0;
     }
-
-    public String serialNumberGenerator(String serialNumber){
-        int number = Integer.parseInt(serialNumber);
-        int newNumber = number + 1;
-        return String.format("%09d", newNumber);
-    }
-
     public double getBalance(String password) {
         validate(password);
         return balance;
@@ -38,7 +30,6 @@ public class Account {
             throw new IncorrectPassword("Invalid Password!!");
         }
     }
-
     public double deposit(double amount) {
         validate(amount);
         balance += amount;
@@ -49,19 +40,16 @@ public class Account {
             throw new IncorrectPassword("Invalid accountNumber!!");
         }
     }
-
     private void validate(double amount) {
         if (amount < 0) {
             throw new InsufficientAmount("Insufficient funds!!");
         }
     }
-
     public double withdraw(double amount, String password) {
         withdrawValidation(amount);
         balance-=amount;
         return balance;
     }
-
     private void withdrawValidation(double amount) {
         if (amount < 0){
             throw new InsufficientFounds("Insufficient funds!!");

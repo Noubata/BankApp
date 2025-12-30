@@ -1,5 +1,7 @@
 package BankAccount;
 
+import BankException.BankAppExecption;
+import BankException.IncorrectPassword;
 import BankException.NoAccountException;
 
 import java.util.ArrayList;
@@ -27,7 +29,12 @@ public class Bank {
         return account;
     }
     public Account getMeAccountNumberFromAccount(String accountNumber){
-        return accounts.get(Integer.parseInt(accountNumber)-1);
+        for (Account account: accounts){
+            if (account.getNuban().equals(accountNumber)){
+                return account;
+            }
+        }
+        return null;
     }
     public double deposit(String accountNumber, int amount) {
         return getMeAccountNumberFromAccount(accountNumber).deposit(amount);
@@ -41,8 +48,23 @@ public class Bank {
         getMeAccountNumberFromAccount(accountNumberReceiver).deposit(amount);
 
     }
-    public double showBalance(String accountNumber, String password){
-        double theBalance = getMeAccountNumberFromAccount(accountNumber).getBalance(password);
-        return theBalance;
+    public void transferToAnotherBank(String senderAccount, Bank receiverBank, String receiverAmount, int amount, String password){
+        Account sender = getMeAccountNumberFromAccount(senderAccount);
+        if (sender == null){
+            throw new BankAppExecption("Account not found");
+        }
+        sender.withdraw(amount, password);
+        receiverBank.deposit(receiverAmount, amount);
+    }
+    public double showBalance(String accountNumber, String password) {
+        try {
+            Account account = getMeAccountNumberFromAccount(accountNumber);
+            if (account == null) {
+                throw new BankAppExecption("Account not found!");
+            }
+            return account.getBalance(password);
+        } catch (BankAppExecption error) {
+            throw error;
+        }
     }
 }
