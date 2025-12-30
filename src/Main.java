@@ -11,8 +11,8 @@ import BankException.BankAppExecption;
 public class Main{
     public static void main(String...args){
         Scanner userInput = new Scanner(System.in);
-        Bank orabank = new Bank("Orabank", new AccountNumberGenerator("123", 334322234));
-        Bank semiBank = new Bank("semicolon", new AccountNumberGenerator("234", 908765432));
+        Bank orabank = new Bank("Orabank", new AccountNumberGenerator("123", 000000123));
+        Bank semiBank = new Bank("semicolon", new AccountNumberGenerator("234", 000000432));
 
         int choice = 0;
         do {
@@ -25,7 +25,8 @@ public class Main{
                     3. Deposit
                     4. Withdraw
                     5. Transfer
-                    6. Exit
+                    6. Inter Bank Transfer
+                    7. Exit
                     
                     """);
 
@@ -153,7 +154,7 @@ public class Main{
                     case 5 -> {
                         System.out.println("""
                                 
-                                Which bank do you want to withdraw from:
+                                Choose your bank for transfer: 
                         1. Orabank
                         2. SemiBank
                                --------------------------
@@ -184,6 +185,40 @@ public class Main{
                             System.out.println("Transfert successfully executed!");
                         }
                     }
+                    case 6 ->{
+                        System.out.println("""
+                                
+                                Which bank do you want to withdraw from:
+                        1. Orabank
+                        2. SemiBank
+                               --------------------------
+                        """);
+                        System.out.print("Choose from above: ");
+                        int senderBank = userInput.nextInt();
+                        System.out.println("Enter receiver's bank (1-Orabank, 2-SemiBank): ");
+                        int receiverBank = userInput.nextInt();
+
+                        System.out.println("Enter your account number: ");
+                        String senderAccount = userInput.next();
+                        System.out.println("Enter receiver's account number: ");
+                        String receiverAccount = userInput.next();
+                        System.out.println("Enter amount: ");
+                        int amount = userInput.nextInt();
+                        System.out.println("Enter your password: ");
+                        String password = userInput.next();
+
+                        if (senderBank == 1 && receiverBank == 1) {
+                            throw new BankAppExecption("Only inter bank transfer is accepted");
+                        } else if (senderBank == 1 && receiverBank == 2) {
+                            orabank.transferToAnotherBank(senderAccount, semiBank, receiverAccount, amount, password);
+                            System.out.println("Transfer successfully executed!");
+                        } else if (senderBank == 2 && receiverBank == 1) {
+                            semiBank.transferToAnotherBank(senderAccount, orabank, receiverAccount, amount, password);
+                            System.out.println("Transfer successfully executed!");
+                        } else {
+                            throw new BankAppExecption("Only inter bank transfer is accepted");
+                        }
+                    }
                 }
 
             } catch (IllegalArgumentException error) {
@@ -191,6 +226,6 @@ public class Main{
             } catch (InputMismatchException error) {
                 System.out.println("Please! Choose only from above!");
             }
-        }while (choice !=6);
+        }while (choice !=7);
     }
 }
