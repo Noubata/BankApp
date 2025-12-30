@@ -35,11 +35,11 @@ public class Account {
         balance += amount;
         return balance;
     }
-    private void validateAccountNumber(int accountNumber){
-        if (!this.nuban.equals(accountNumber)){
-            throw new IncorrectPassword("Invalid accountNumber!!");
-        }
-    }
+//    private void validateAccountNumber(int accountNumber){
+//        if (!this.nuban.equals(accountNumber)){
+//            throw new IncorrectPassword("Invalid accountNumber!!");
+//        }
+//    }
     private void validate(double amount) {
         if (amount < 0) {
             throw new InsufficientAmount("Insufficient funds!!");

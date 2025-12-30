@@ -11,8 +11,8 @@ import BankException.BankAppExecption;
 public class Main{
     public static void main(String...args){
         Scanner userInput = new Scanner(System.in);
-        Bank orabank = new Bank("Orabank", new AccountNumberGenerator("123", 000000123));
-        Bank semiBank = new Bank("semicolon", new AccountNumberGenerator("234", 000000432));
+        Bank orabank = new Bank("Orabank", new AccountNumberGenerator(123, 000000235));
+        Bank semiBank = new Bank("semicolon", new AccountNumberGenerator(234, 000000234));
 
         int choice = 0;
         do {
