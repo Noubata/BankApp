@@ -51,7 +51,7 @@ public class Bank {
     public void transferToAnotherBank(String senderAccount, Bank receiverBank, String receiverAmount, int amount, String password){
         Account sender = getMeAccountNumberFromAccount(senderAccount);
         if (sender == null){
-            throw new BankAppExecption("Account not found");
+            throw new IllegalArgumentException("Account not found");
         }
         sender.withdraw(amount, password);
         receiverBank.deposit(receiverAmount, amount);
@@ -60,10 +60,10 @@ public class Bank {
         try {
             Account account = getMeAccountNumberFromAccount(accountNumber);
             if (account == null) {
-                throw new BankAppExecption("Account not found!");
+                throw new IllegalArgumentException("Account not found!");
             }
             return account.getBalance(password);
-        } catch (BankAppExecption error) {
+        } catch (IllegalArgumentException error) {
             throw error;
         }
     }

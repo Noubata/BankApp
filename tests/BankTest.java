@@ -43,7 +43,7 @@ public class BankTest {
     }
     @Test
     void testThat_createAccountBeny_deposit200_transfer100ToChibuzo(){
-        Bank orabank = new Bank("Orabank", new AccountNumberGenerator(234, 908765432));
+        Bank orabank = new Bank("Orabank", new AccountNumberGenerator(234, 908765432)       );
         assertEquals(0, orabank.getSize());
         Account account = orabank.createAccount("Beny", "1234");
         Account account1 = orabank.createAccount("Chibuzo", "2234");

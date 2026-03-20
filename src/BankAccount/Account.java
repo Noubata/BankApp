@@ -27,7 +27,7 @@ public class Account {
 
     private void validate(String password) {
         if (!this.password.equals(password)) {
-            throw new IncorrectPassword("Invalid Password!!");
+            throw new IllegalArgumentException("Invalid Password!!");
         }
     }
     public double deposit(double amount) {
@@ -42,7 +42,7 @@ public class Account {
 //    }
     private void validate(double amount) {
         if (amount < 0) {
-            throw new InsufficientAmount("Insufficient funds!!");
+            throw new IllegalArgumentException("Insufficient funds!!");
         }
     }
     public double withdraw(double amount, String password) {
@@ -52,7 +52,7 @@ public class Account {
     }
     private void withdrawValidation(double amount) {
         if (amount < 0){
-            throw new InsufficientFounds("Insufficient funds!!");
+            throw new IllegalArgumentException("Insufficient funds!!");
         }
     }
 }

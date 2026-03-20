@@ -85,6 +85,7 @@ public class Main{
                             System.out.println("Enter your password: ");
                             String password = userInput.next();
                             double theBalance = orabank.showBalance(accountNumber, password);
+                            System.out.println("Welcome" + accountNumber );
                             System.out.println("Your balance is: " + theBalance);
                         }else {
                             System.out.println("Enter your account number: ");
@@ -208,7 +209,7 @@ public class Main{
                         String password = userInput.next();
 
                         if (senderBank == 1 && receiverBank == 1) {
-                            throw new BankAppExecption("Only inter bank transfer is accepted");
+                            throw new IllegalArgumentException("Only inter bank transfer is accepted");
                         } else if (senderBank == 1 && receiverBank == 2) {
                             orabank.transferToAnotherBank(senderAccount, semiBank, receiverAccount, amount, password);
                             System.out.println("Transfer successfully executed!");
@@ -216,7 +217,7 @@ public class Main{
                             semiBank.transferToAnotherBank(senderAccount, orabank, receiverAccount, amount, password);
                             System.out.println("Transfer successfully executed!");
                         } else {
-                            throw new BankAppExecption("Only inter bank transfer is accepted");
+                            throw new IllegalArgumentException("Only inter bank transfer is accepted");
                         }
                     }
                 }
